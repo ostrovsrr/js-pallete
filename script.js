@@ -2,20 +2,13 @@
 
 const cols = document.querySelectorAll(".col");
 const container = document.querySelector(".container");
-
-container.addEventListener("click", function (e) {
-  // Open or Lock mechanic
-  if (e.target.classList.contains("fa-solid")) {
-    e.target.classList.toggle("fa-lock-open");
-    e.target.classList.toggle("fa-lock");
-  } else if (e.target.classList.contains("hex-code")) {
-    copyContent(e.target.textContent);
-  }
-});
+const spaceEl = document.querySelector(".space-key");
+const popup = document.querySelector(".popup");
 
 const copyContent = async (text) => {
   try {
     await navigator.clipboard.writeText(text);
+    coppiedPopup();
   } catch (e) {
     console.error("Failed to copy: ", e);
   }
@@ -30,7 +23,6 @@ const copyContent = async (text) => {
 //   }
 //   return color;
 // };
-chroma.random();
 const setColors = function () {
   cols.forEach((col) => {
     if (col.children[1].classList.contains("fa-lock")) {
@@ -38,24 +30,50 @@ const setColors = function () {
     }
     const hex = chroma.random();
     const [hEl, lock] = col.children;
-    hEl.style.color = chroma(hex).luminance() > 0.5 ? "black" : "white";
-    lock.style.color = chroma(hex).luminance() > 0.5 ? "black" : "white";
+    lock.style.color = hEl.style.color =
+      chroma(hex).luminance() > 0.5 ? "black" : "white";
+    // lock.style.color = chroma(hex).luminance() > 0.5 ? "black" : "white";
     hEl.textContent = hex;
     col.style.background = hex;
   });
 };
 
-setColors();
-
-document.body.onkeydown = function (e) {
-  if (e.code == "Space") {
+const pressSpace = function (e) {
+  if (e.code == "Space" || e.target.classList.contains("space-key")) {
     setColors();
 
-    const spaceKeyDiv = document.querySelector(".space-key");
-    spaceKeyDiv.classList.add("pressed");
+    spaceEl.classList.add("pressed");
 
     setTimeout(() => {
-      spaceKeyDiv.classList.remove("pressed");
+      spaceEl.classList.remove("pressed");
     }, 100);
   }
+};
+
+container.addEventListener("click", function (e) {
+  // Open or Lock mechanic
+  if (e.target.classList.contains("fa-solid")) {
+    e.target.classList.toggle("fa-lock-open");
+    e.target.classList.toggle("fa-lock");
+  } else if (e.target.classList.contains("hex-code")) {
+    copyContent(e.target.textContent);
+  }
+});
+
+document.body.onkeydown = function (e) {
+  pressSpace(e);
+};
+
+spaceEl.addEventListener("click", function (e) {
+  pressSpace(e);
+});
+
+setColors();
+
+const coppiedPopup = function () {
+  popup.classList.add("show");
+
+  setTimeout(() => {
+    popup.classList.remove("show");
+  }, 2000);
 };
