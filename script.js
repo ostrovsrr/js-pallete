@@ -32,8 +32,8 @@ const setColors = function () {
     const [hEl, lock] = col.children;
     lock.style.color = hEl.style.color =
       chroma(hex).luminance() > 0.5 ? "black" : "white";
-    // lock.style.color = chroma(hex).luminance() > 0.5 ? "black" : "white";
-    hEl.textContent = hex;
+    const temp = hex;
+    hEl.textContent = hex.hex().toUpperCase().slice(1);
     col.style.background = hex;
   });
 };

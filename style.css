@@ -4,6 +4,10 @@
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
 }
+
+html {
+  font-size: 62.5%;
+}
 .container {
   display: flex;
 }
@@ -12,22 +16,38 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: 500px;
+  height: 90vh;
+  width: 20%;
   justify-content: space-around;
   align-items: center;
+}
+@media (max-width: 680px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+  }
+
+  .col {
+    width: 100%;
+  }
 }
 
 i {
   font-size: 1.7rem;
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 .hex-code {
-  padding: 10px;
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 .hex-code:hover,
 i:hover {
   opacity: 0.3;
+  background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   transition: 0.3s;
 }
@@ -35,7 +55,7 @@ i:hover {
 .keyboard {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding: 2rem;
 }
 
 .key {
@@ -46,14 +66,13 @@ i:hover {
   border-radius: 4px;
   background-color: #f9f9f9;
   box-shadow: 0 4px #bbb;
-  font-size: 16px;
+  font-size: 1.5rem;
   text-transform: uppercase;
 }
 
 .space-key {
-  width: 300px;
-  height: 40px;
-  margin: 5px;
+  width: 20rem;
+  height: 2rem;
   user-select: none;
 }
 
@@ -65,13 +84,14 @@ i:hover {
 .popup {
   visibility: hidden; /* Keeps the element invisible initially */
   color: #fff;
+  font-size: 1.5rem;
   background-color: #333;
-  min-width: 250px;
-  border-radius: 2px;
+  min-width: 25rem;
+  border-radius: 1rem;
   padding: 16px;
   text-align: center;
   left: 50%;
-  bottom: 30px;
+  bottom: 3rem;
   z-index: 1;
   position: fixed;
   opacity: 0; /* Start fully transparent */
