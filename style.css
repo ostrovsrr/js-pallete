@@ -33,15 +33,11 @@ html {
   }
 }
 
-i {
-  font-size: 1.7rem;
-  padding: 1rem;
-  border-radius: 1rem;
-}
-
+i,
 .hex-code {
   padding: 1rem;
   border-radius: 1rem;
+  font-size: 2rem;
 }
 
 .hex-code:hover,
